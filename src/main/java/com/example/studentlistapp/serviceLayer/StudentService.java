@@ -35,7 +35,7 @@ public class StudentService {
         return savedStudent;
     }
 
-    //DELETING A STUDENT
+    //DELETING A STUDENT BY ID
     public String deleteStudentById(String id) {
         Long idKey = Long.parseLong(id);
         studentRepository.deleteById(idKey);
