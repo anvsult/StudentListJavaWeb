@@ -16,10 +16,13 @@ public class StudentService {
     public StudentService(StudentRepository studentRepository) {
         this.studentRepository = studentRepository;
     }
-    public List<Student> getStudents() {
 
+    //GETTING ALL STUDENTS
+    public List<Student> getStudents() {
         return studentRepository.findAll();
     }
+
+    //ADDING A STUDENT
     public Student addStudent(Student student) {
         Student savedStudent = null;
         String email = student.getEmail();
@@ -32,12 +35,14 @@ public class StudentService {
         return savedStudent;
     }
 
+    //DELETING A STUDENT
     public String deleteStudentById(String id) {
         Long idKey = Long.parseLong(id);
         studentRepository.deleteById(idKey);
         return "Student with id " + id + " deleted successfully.";
     }
 
+    //UPDATING A STUDENT
     public Student updateStudent(String id, Student newStudentData) {
         Student savedStudent = null;
         Long idKey = Long.parseLong(id);
@@ -55,11 +60,13 @@ public class StudentService {
 
     }
 
+    //GET STUDENT BY ID
     public Optional<Student> getStudentById(String id) {
         Long idKey = Long.parseLong(id);
         return studentRepository.findById(idKey);
     }
 
+    //GETTING STUDENT BY EMAIL
     public Optional<Student> getStudentByEmail(String email) {
         return studentRepository.findStudentByEmail(email);
     }
