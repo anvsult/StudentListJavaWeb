@@ -3,23 +3,44 @@ package com.example.studentlistapp.presentationLayer;
 import com.example.studentlistapp.serviceLayer.StudentService;
 import com.example.studentlistapp.dataAccessLayer.Student;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
+@RequestMapping("/api/v1/students")
 public class StudentController {
     private final StudentService studentService;
     @Autowired
     public StudentController(StudentService studentService) {
-        this.studentService = new StudentService();
+        this.studentService = studentService;
     }
 
-    @GetMapping("/api/v1/students")
-    public List<Student> index() {
+    @GetMapping()
+    public List<Student> getAllStudents() {
         return studentService.getStudents();
+    }
+    @PostMapping()
+    public Student addStudent(@RequestBody Student student) {
+        return studentService.addStudent(student);
+    }
+    @DeleteMapping("/{id}")
+    public String deleteStudentById(@PathVariable String id) {
+        return studentService.deleteStudentById(id);
+    }
+    @PutMapping("/{id}")
+    public Student updateStudent(@PathVariable String id, @RequestBody Student newStudentData) {
+        return studentService.updateStudent(id, newStudentData);
+    }
+    @GetMapping("/{id}")
+    public Optional<Student> getStudentById(@PathVariable String id){
+        return studentService.getStudentById(id);
+    }
+    @GetMapping("/email/{email}")
+    public Optional<Student> getStudentByEmail(@PathVariable String email){
+        System.out.println(email);
+        return studentService.getStudentByEmail(email);
     }
 
 }

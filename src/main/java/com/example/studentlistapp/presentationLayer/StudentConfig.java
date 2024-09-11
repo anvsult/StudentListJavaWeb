@@ -42,7 +42,8 @@ public class StudentConfig {
                     LocalDate.now().getYear() - 2002
             );
 
-            repository.saveAll(List.of(mariam, alex));
+            repository.saveAll(
+                    List.of(mariam, alex, bob, kevin, william));
         };
     }
 }
